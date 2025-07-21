@@ -1,0 +1,30 @@
+body {
+    margin: 2rem auto;
+    max-width: 800px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f9; color: #333;
+}
+h1 { text-align: center; }
+textarea, #summary {
+    width: 100%; padding: 1rem;
+    font-size: 1rem; border: 1px solid #ccc;
+    border-radius: 4px; resize: vertical;
+}
+button {
+    display: block;
+    margin: 1rem 0;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    background: #0066cc; color: #fff;
+    border: none; border-radius: 4px;
+    cursor: pointer;
+}
+button:disabled { background: #99c0e0; cursor: not-allowed; }
+#notification {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    display: none;
+}
+#error { background: #ffe0e0; color: #900; }
+#success { background: #e0ffe0; color: #090; }

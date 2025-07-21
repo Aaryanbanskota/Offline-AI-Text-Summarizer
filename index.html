@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Offline AI Text Summarizer</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <h1>Offline AI Text Summarizer</h1>
+
+  <div id="notification"></div>
+
+  <label for="textInput"><strong>Enter Text:</strong></label><br />
+  <textarea id="textInput" rows="10" placeholder="Paste or type your text here..."></textarea>
+
+  <br />
+  <label for="fileInput"><strong>Upload File (TXT or PDF):</strong></label>
+  <input type="file" id="fileInput" accept=".txt,.pdf" />
+
+  <br />
+  <button id="summarizeBtn">Summarize</button>
+
+  <h2>Summary:</h2>
+  <div id="summary">Your summary will appear here.</div>
+
+  <script>
+    const btn = document.getElementById("summarizeBtn");
+    const fileInput = document.getElementById("fileInput");
+    const textInput = document.getElementById("textInput");
+    const summaryDiv = document.getElementById("summary");
+    const notify = document.getElementById("notification");
+
+    function notifyUser(type, msg) {
+      notify.className = type === "error" ? "error" : "success";
+      notify.id = type;
+      notify.innerText = msg;
+      notify.style.display = "block";
+    }
+
+    async function handleSummarize() {
+      const file = fileInput.files[0];
+      const rawText = textInput.value.trim();
+
+      const formData = new FormData();
+
+      if (file) {
+        formData.append("file", file);
+      } else if (rawText) {
+        formData.append("text", rawText);
+      } else {
+        notifyUser("error", "Please enter some text or upload a file.");
+        return;
+      }
+
+      btn.disabled = true;
+      notifyUser("success", "Processing...");
+
+      try {
+        const response = await fetch("/summarize", {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          summaryDiv.innerText = result.summary;
+          notifyUser("success", "✅ Summary generated successfully.");
+        } else {
+          notifyUser("error", result.error || "❌ Summarization failed.");
+        }
+      } catch (err) {
+        notifyUser("error", "❌ Connection to summarizer failed.");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    btn.addEventListener("click", handleSummarize);
+  </script>
+</body>
+</html>
